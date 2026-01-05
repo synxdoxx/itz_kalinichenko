@@ -11,6 +11,26 @@ USERS_FILE = "saves/users.json" #Хранит путь к файлу со все
 ARTS_FILE = "saves/arts.json" #Хранит путь к файлу со списком всех артифактов
 SAVE_FOLDER = "saves" #Хранит путь к папке с сохранениями
 
+def generate_arts():
+    """Создает файл с артефактами"""
+    os.makedirs(SAVE_FOLDER, exist_ok=True)  # Создает папку, если её еще нет
+
+    data = [
+  "Крыса на палке",
+  "Теплая куртка",
+  "Крепкий сон",
+  "Чиикава",
+  "Сумка с ноутом",
+  "Колготы",
+  "Кофе из сезонного меню",
+  "Котик",
+  "Два котика",
+  "Деньги"
+]  # Записывает все данные в файл в нужном формате
+
+    with open(ARTS_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+
 def load_users():
     """Считывает информацию о всех юзерах (имя и пароль), записанных в users.json, если этот файл уже существует"""
     if not os.path.exists(USERS_FILE):
@@ -610,6 +630,7 @@ class Game: #класс самой игры
                 self.game_active = False
                 break   #Конец 3 ветки. Короткая ветка для вайба
 
+generate_arts()
 player = None
 while not player: #цикл, чтобы в конечном итоге точно зарегестрировать/залогинить пользователя
     print("1. Вход")
